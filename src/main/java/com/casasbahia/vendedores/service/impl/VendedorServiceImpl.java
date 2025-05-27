@@ -105,7 +105,8 @@ public class VendedorServiceImpl implements VendedorService {
             case "OUTSOURCING": sufixo = "OUT"; break;
             case "CLT": sufixo = "CLT"; break;
             case "PESSOA JURÍDICA": sufixo = "PJ"; break;
-            default: sufixo = "OUT";
+            default:
+                sufixo = "OUT";
         }
         return String.format("%08d-%s", count, sufixo);
     }
