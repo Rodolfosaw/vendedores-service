@@ -1,6 +1,9 @@
 package com.casasbahia.vendedores.dto;
 
+import com.casasbahia.vendedores.validation.DocumentoValido;
+import com.casasbahia.vendedores.validation.TipoContratacaoValida;
 import jakarta.validation.constraints.*;
+
 import java.time.LocalDate;
 
 public class VendedorDTO {
@@ -16,12 +19,14 @@ public class VendedorDTO {
     private LocalDate dataNascimento;
 
     @NotBlank(message = "Documento (CPF ou CNPJ) é obrigatório")
+    @DocumentoValido
     private String documento;
 
     @NotBlank(message = "E-mail é obrigatório")
     @Email(message = "E-mail inválido")
     private String email;
 
+    @TipoContratacaoValida
     @NotBlank(message = "Tipo de contratação é obrigatório")
     private String tipoContratacao;
 
@@ -30,27 +35,67 @@ public class VendedorDTO {
 
     // --- GETTERS and SETTERS ---
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
 
-    public String getMatricula() { return matricula; }
-    public void setMatricula(String matricula) { this.matricula = matricula; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public String getNome() { return nome; }
-    public void setNome(String nome) { this.nome = nome; }
+    public String getMatricula() {
+        return matricula;
+    }
 
-    public LocalDate getDataNascimento() { return dataNascimento; }
-    public void setDataNascimento(LocalDate dataNascimento) { this.dataNascimento = dataNascimento; }
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
 
-    public String getDocumento() { return documento; }
-    public void setDocumento(String documento) { this.documento = documento; }
+    public String getNome() {
+        return nome;
+    }
 
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-    public String getTipoContratacao() { return tipoContratacao; }
-    public void setTipoContratacao(String tipoContratacao) { this.tipoContratacao = tipoContratacao; }
+    public LocalDate getDataNascimento() {
+        return dataNascimento;
+    }
 
-    public Long getFilialId() { return filialId; }
-    public void setFilialId(Long filialId) { this.filialId = filialId; }
+    public void setDataNascimento(LocalDate dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public String getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(String documento) {
+        this.documento = documento;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTipoContratacao() {
+        return tipoContratacao;
+    }
+
+    public void setTipoContratacao(String tipoContratacao) {
+        this.tipoContratacao = tipoContratacao;
+    }
+
+    public Long getFilialId() {
+        return filialId;
+    }
+
+    public void setFilialId(Long filialId) {
+        this.filialId = filialId;
+    }
 }
