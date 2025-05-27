@@ -9,4 +9,3 @@ public class VendedoresServiceApplication {
         SpringApplication.run(VendedoresServiceApplication.class, args);
     }
 }
-

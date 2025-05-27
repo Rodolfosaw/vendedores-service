@@ -56,4 +56,3 @@ public class Vendedor {
     public Long getFilialId() { return filialId; }
     public void setFilialId(Long filialId) { this.filialId = filialId; }
 }
-

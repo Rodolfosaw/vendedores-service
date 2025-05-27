@@ -28,7 +28,7 @@ public class VendedorDTO {
     @NotNull(message = "Filial é obrigatória")
     private Long filialId;
 
-    // --- GETTERS E SETTERS ---
+    // --- GETTERS and SETTERS ---
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
