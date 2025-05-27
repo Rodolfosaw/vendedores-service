@@ -1,10 +1,9 @@
 # Vendedores Service
 
-API REST para CRUD de Vendedores  
+API REST para CRUD de Vendedores
 Desafio Backend Casas Bahia
 
 ## Tecnologias
-
 - Java 21
 - Spring Boot 3.2.5
 - Spring Data JPA
@@ -14,3 +13,23 @@ Desafio Backend Casas Bahia
 - JUnit + Mockito
 - **Gradle** (build system)
 
+## Estrutura do Projeto
+```plaintext
+vendedores-service/
+├── build.gradle
+├── settings.gradle
+├── README.md
+└── src
+    ├── main
+    │   ├── java/com/casasbahia/vendedores
+    │   │   ├── VendedoresServiceApplication.java
+    │   │   ├── controller
+    │   │   ├── dto
+    │   │   ├── exception
+    │   │   ├── model
+    │   │   ├── repository
+    │   │   ├── service
+    │   │   └── mock
+    │   └── resources
+    │       └── application.properties
+    └── test/java

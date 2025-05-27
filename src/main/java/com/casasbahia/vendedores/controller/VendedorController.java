@@ -2,6 +2,7 @@ package com.casasbahia.vendedores.controller;
 
 import com.casasbahia.vendedores.dto.VendedorDTO;
 import com.casasbahia.vendedores.service.VendedorService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,12 +29,12 @@ public class VendedorController {
     }
 
     @PostMapping
-    public ResponseEntity<VendedorDTO> create(@RequestBody VendedorDTO dto) {
+    public ResponseEntity<VendedorDTO> create(@RequestBody @Valid VendedorDTO dto) {
         return ResponseEntity.ok(service.create(dto));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<VendedorDTO> update(@PathVariable Long id, @RequestBody VendedorDTO dto) {
+    public ResponseEntity<VendedorDTO> update(@PathVariable Long id, @RequestBody @Valid VendedorDTO dto) {
         return ResponseEntity.ok(service.update(id, dto));
     }
 

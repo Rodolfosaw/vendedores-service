@@ -10,3 +10,4 @@ public interface VendedorService {
     VendedorDTO update(Long id, VendedorDTO dto);
     void delete(Long id);
 }
+

@@ -22,7 +22,7 @@ public class VendedorServiceImpl implements VendedorService {
     @Override
     public List<VendedorDTO> findAll() {
         return repository.findAll().stream()
-                .map(v -> /* converter para DTO */ null)
+                .map(this::mapToDTO)
                 .collect(Collectors.toList());
     }
 
@@ -30,26 +30,83 @@ public class VendedorServiceImpl implements VendedorService {
     public VendedorDTO findById(Long id) {
         Vendedor v = repository.findById(id)
                 .orElseThrow(() -> new CustomException("Vendedor não encontrado"));
-        return /* converter para DTO */ null;
+        return mapToDTO(v);
     }
 
     @Override
     public VendedorDTO create(VendedorDTO dto) {
+
         if (repository.existsByDocumento(dto.getDocumento())) {
             throw new CustomException("Documento já cadastrado");
         }
-        Vendedor v = /* converter para entidade */ null;
-        return /* salvar e converter para DTO */ null;
+
+        String matricula = gerarMatricula(dto.getTipoContratacao());
+
+        if (repository.existsByMatricula(matricula)) {
+            throw new CustomException("Matrícula já cadastrada");
+        }
+
+        Vendedor v = new Vendedor();
+        v.setMatricula(matricula);
+        v.setNome(dto.getNome());
+        v.setDataNascimento(dto.getDataNascimento());
+        v.setDocumento(dto.getDocumento());
+        v.setEmail(dto.getEmail());
+        v.setTipoContratacao(dto.getTipoContratacao());
+        v.setFilialId(dto.getFilialId());
+
+        Vendedor saved = repository.save(v);
+        return mapToDTO(saved);
     }
 
     @Override
     public VendedorDTO update(Long id, VendedorDTO dto) {
-        // similar à criação, com busca e merge
-        return null;
+        Vendedor existing = repository.findById(id)
+                .orElseThrow(() -> new CustomException("Vendedor não encontrado"));
+
+        if (!existing.getDocumento().equals(dto.getDocumento())
+                && repository.existsByDocumento(dto.getDocumento())) {
+            throw new CustomException("Documento já cadastrado");
+        }
+
+        existing.setNome(dto.getNome());
+        existing.setDataNascimento(dto.getDataNascimento());
+        existing.setDocumento(dto.getDocumento());
+        existing.setEmail(dto.getEmail());
+        existing.setTipoContratacao(dto.getTipoContratacao());
+        existing.setFilialId(dto.getFilialId());
+        Vendedor updated = repository.save(existing);
+        return mapToDTO(updated);
     }
 
     @Override
     public void delete(Long id) {
         repository.deleteById(id);
+    }
+
+    private VendedorDTO mapToDTO(Vendedor v) {
+        VendedorDTO dto = new VendedorDTO();
+        dto.setId(v.getId());
+        dto.setMatricula(v.getMatricula());
+        dto.setNome(v.getNome());
+        dto.setDataNascimento(v.getDataNascimento());
+        dto.setDocumento(v.getDocumento());
+        dto.setEmail(v.getEmail());
+        dto.setTipoContratacao(v.getTipoContratacao());
+        dto.setFilialId(v.getFilialId());
+        return dto;
+    }
+
+    private String gerarMatricula(String tipoContratacao) {
+
+        long count = repository.count() + 1;
+        String sufixo;
+        switch (tipoContratacao.toUpperCase()) {
+            case "OUTSOURCING": sufixo = "OUT"; break;
+            case "CLT": sufixo = "CLT"; break;
+            case "PESSOA JURÍDICA": sufixo = "PJ"; break;
+            default: sufixo = "OUT";
+        }
+        return String.format("%08d-%s", count, sufixo);
     }
 }
