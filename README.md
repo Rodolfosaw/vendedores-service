@@ -1,7 +1,7 @@
 # Vendedores Service
 
 API REST para CRUD de Vendedores
-Desafio Backend Casas Bahia
+Mercantiservice – Arquitetura Backend com Spring Boot
 
 ## Tecnologias
 - Java 21
@@ -24,6 +24,13 @@ Desafio Backend Casas Bahia
 - User: sa
 - Password: (deixe vazio)
 
+## 🔗 Documentação da API (Swagger)
+
+Acesse a documentação interativa da API via Swagger UI:
+
+👉 [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+
+
 ## Estrutura do Projeto
 ```plaintext
 vendedores-service/
@@ -32,15 +39,19 @@ vendedores-service/
 ├── README.md
 └── src
     ├── main
-    │   ├── java/com/casasbahia/vendedores
-    │   │   ├── VendedoresServiceApplication.java
+    │   ├── java/com/mercantiservice/vendedores
     │   │   ├── controller
     │   │   ├── dto
+    │   │   ├── enums
     │   │   ├── exception
+    │   │   ├── mock
     │   │   ├── model
     │   │   ├── repository
     │   │   ├── service
-    │   │   └── mock
+    │   │   ├── validation
+    │   │   └── VendedoresServiceApplication.java
     │   └── resources
     │       └── application.properties
-    └── test/java
+    └── test
+        └── java/com/mercantiservice/vendedores/service/impl
+            └── VendedorServiceImplTest.java
